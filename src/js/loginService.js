@@ -1,14 +1,16 @@
 import {RequestService} from './requestService.js';
 
+
 export let pseudo = "";
+export let token = "";
 const requestService = new RequestService();
 
 export async function login(username, password) {
-    await requestService.doPost("http://127.0.0.1:3301/login", {user: username, pass: password});
+    //await requestService.doGet("http://127.0.0.1:3018/login?username=" + username + "&password=" + password);
+	await requestService.doGet("http://127.0.0.1:3018/login", {'username': username, 'password': password});
     let results = await requestService.jsonData;
-    let tmpPseudo = "inconnu";
-    if (results != null && results.hasOwnProperty('pseudo')) {
-        tmpPseudo = results.pseudo;
+    if (results != null && results != false) {
+        token = results;
     }
-    pseudo = tmpPseudo;
+    pseudo = username;
 }

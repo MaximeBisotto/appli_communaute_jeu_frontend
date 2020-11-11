@@ -6,6 +6,7 @@ export class RequestService {
     }
 
     async doPost(url, paramJson) {
+    	console.log(paramJson);
         this.jsonData = "";
         let myInit = {
             method: 'POST',
@@ -35,7 +36,7 @@ export class RequestService {
 
     async doGet(url) {
         this.jsonData = "";
-        await fetch(url)
+        await fetch(url, {headers: {"Access-Control-Allow-Origin": "*"},})
             .then((response) => {
                 let contentType = response.headers.get("content-type");
                 if (response.ok) {

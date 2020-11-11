@@ -7,13 +7,14 @@
     let jsonData = [] ;
 
     onMount(async () => {
-        await getGameDescriptives();
-        jsonData = [...gamesDescriptives];
+        //await getGameDescriptives();
+        //jsonData = [...gamesDescriptives];
+        getGameInfo();
         console.log(jsonData);
     });
 
     let gameName ;
-    async function getFoundGames(gameName) {
+    /*async function getFoundGames(gameName) {
         console.log(gameName);
         await getGames(gameName);
         jsonData = [...foundGames];
@@ -23,6 +24,28 @@
 
     function clear() {
         gameName = "";
+    }*/
+    
+        async function getGameInfo() {
+        fetch('http://127.0.0.1:3018/game', {
+            method: 'get',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+            .then(json => {return json})
+            .then(function (data) {
+                jsonData = Object.entries(data.json());
+                //console.log(data.json());
+                //return data.json();
+            })
+            /*.then((data) => {
+                
+            })*/
+            .catch(function (error) {
+                console.log('Request failed', error);
+            });
     }
 </script>
 
@@ -30,13 +53,13 @@
 <div id="gameShopContainer">
     <SearchComponent id="searchBarShop" bind:value={gameName} on:submit={getFoundGames(gameName)} />
     <div id="gameDescriptiveContainer">
-        {#each jsonData as game}
+        {#each jsonData as {name, coast}}
             <!-- il est recommandé d'éviter la syntaxe {...game} (spread) car elle n'est pas optimale-->
             <GameDescriptive
-                    gameName="game.gameName"
+                    gameName="name"
                     gameType="game.gameType"
                     gameSupport="game.gameSupport"
-                    cost="game.cost"
+                    cost="coast"
             />
         {/each}
     </div>

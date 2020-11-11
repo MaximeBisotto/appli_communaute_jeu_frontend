@@ -1,5 +1,6 @@
 <script>
     import {createEventDispatcher} from "svelte";
+    import { token } from '../../store/userInfo.js';
 
     let eventName ;
     let organizerName ;
@@ -12,13 +13,36 @@
     let date ;
     let autorizedLate ;
     let beginTime ;
-    let endTime ;
+    let duration ;
 
     // make a json object
     export let value ;
 
     const dispatch = createEventDispatcher();
-    const submit = () => dispatch('submit');
+    //const submit = () => dispatch('submit');
+    
+    function submit() {
+        fetch('http://localhost:3018/event/create', {
+            method: 'post',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                "Access-Control-Allow-Origin": "*"
+            },
+            body: 'maxPlayer=' + maximumPlayerNumber + '&eventLocation=' + eventLocation + '&startDate=' + date + '&startTime=' + beginTime + '&duration='
+                + duration + '&lateMax='+ autorizedLate + '&token=' + token 
+        })
+            .then(json => {return json})
+            .then(function (data) {
+                console.log('Request succeeded with JSON response', data);
+                //return data.json();
+            })
+            /*.then((data) => {
+                createAccountData = data.result;
+            })*/
+            .catch(function (error) {
+                console.log('Request failed', error);
+            });
+    }
 </script>
 
 <div id="formMakerContainer">
@@ -33,7 +57,7 @@
     <input type="text" bind:value="{date}" placeholder="01/01/2020"/>
     <input type="text" bind:value="{autorizedLate}" placeholder="Retard autorisé en minute"/>
     <input type="text" bind:value="{beginTime}" placeholder="20h00"/>
-    <input type="text" bind:value="{endTime}" placeholder="23h00"/>
+    <input type="text" bind:value="{duration}" placeholder="Durée de l'évènement en minutes'"/>
     <button value={value} on:click={submit}>Créer l'événement</button>
 </div>
 

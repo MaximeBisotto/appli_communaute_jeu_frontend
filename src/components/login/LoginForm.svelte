@@ -1,15 +1,34 @@
 <script>
     import {login, pseudo} from "../../js/loginService.js";
+    import { token } from '../../store/userInfo.js';
+    
 
     let inputId = "";
     let inputPassword = "";
 
     // cette données devra être stocké dans un store
-    let pseudo2 = "no result";
+    //export const token = writable("");
     async function handleClickConnectButton() {
-        console.log("send user : " + {inputId} + " , password : " + {inputPassword});
-        await login(inputId, inputPassword);
-        pseudo2 = pseudo;
+        fetch('http://127.0.0.1:3018/login', {
+            method: 'post',
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                "Access-Control-Allow-Origin": "*"
+            },
+            body: 'username=' + inputId + '&password=' + inputPassword
+        })
+            .then(json => {return json})
+            .then(function (data) {
+                token.set(data);
+                console.log(token);
+                //return data.json();
+            })
+            /*.then((data) => {
+                
+            })*/
+            .catch(function (error) {
+                console.log('Request failed', error);
+            });
     }
 
 </script>

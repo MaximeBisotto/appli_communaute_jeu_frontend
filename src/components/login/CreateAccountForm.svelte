@@ -1,33 +1,35 @@
 <script>
     //import Title from "../common/Title.svelte";
 
-    let name='', password='', mail='', city='', birthDate='', mobile='';
+    let username='', password='', mail='', city='', birthDate='', mobile='';
     let errorName='', errorPassword='', errorMail='', errorCity='', errorBirthDate='', errorMobile='';
-    let createAccountData = null;
+    let token = '';
 
-    function createAccount(name, password, mail, city, birthDate, mobile) {
-        fetch('http://localhost:3301/createAccount', {
+    function createAccount(username, password, mail, city, birthDate, mobile) {
+        fetch('http://localhost:3018/register', {
             method: 'post',
             headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                "Access-Control-Allow-Origin": "*"
             },
-            body: 'name=' + name + '&password=' + password + '&mail=' + mail + '&city=' + city + '&birthDate='
+            body: 'username=' + username + '&password=' + password + '&mail=' + mail + '&city=' + city + '&birthDate='
                 + birthDate + '&mobile='+ mobile
         })
             .then(json => {return json})
             .then(function (data) {
                 console.log('Request succeeded with JSON response', data);
-                return data.json();
+                token=data;
+                //return data.json();
             })
-            .then((data) => {
+            /*.then((data) => {
                 createAccountData = data.result;
-            })
+            })*/
             .catch(function (error) {
                 console.log('Request failed', error);
             });
     }
 
-    $: if (createAccountData != null) {
+    /*$: if (createAccountData != null) {
         console.log(createAccountData);
         if (createAccountData.error) {
             // si une erreur c'est produite
@@ -57,14 +59,14 @@
             console.log('redirection vers une autre page');
             // s'il n'y a pas d'erreur et que le compte a été créé
         }
-    }
+    }*/
 
 </script>
 
 
 <div>
     <p class="errorMessage" id="nameErrorMessage">{errorName}</p>
-    <input name="name" id="name" type="text" bind:value={name} placeholder="votre identifiant"/>
+    <input name="username" id="username" type="text" bind:value={username} placeholder="votre identifiant"/>
     <p class="errorMessage" id="passwordErrorMessage">{errorPassword}</p>
     <input name="password" id="password" type="password" bind:value={password} placeholder="votre mot de passe"/>
     <p class="errorMessage" id="mailErrorMessage">{errorMail}</p>
@@ -76,7 +78,7 @@
     <p class="errorMessage" id="mobileErrorMessage">{errorMobile}</p>
     <input name="mobile" id="mobile" type="tel" pattern="[0]{1}[6-7]{1}[0-9]{8}" bind:value={mobile} placeholder="votre numéro de mobile"/>
 </div>
-<button on:click={createAccount(name, password, mail, city, birthDate, mobile)}>Valider</button>
+<button on:click={createAccount(username, password, mail, city, birthDate, mobile)}>Valider</button>
 <button on:click={() => {}}>Annuler</button>
 
 <style>
