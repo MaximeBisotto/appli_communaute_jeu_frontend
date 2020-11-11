@@ -1,5 +1,6 @@
 <script>
     //import Title from "../common/Title.svelte";
+    import { token } from '../../store/userInfo.js';
 
     let username='', password='', mail='', city='', birthDate='', mobile='';
     let errorName='', errorPassword='', errorMail='', errorCity='', errorBirthDate='', errorMobile='';
@@ -15,15 +16,21 @@
             body: 'username=' + username + '&password=' + password + '&mail=' + mail + '&city=' + city + '&birthDate='
                 + birthDate + '&mobile='+ mobile
         })
-            .then(json => {return json})
-            .then(function (data) {
-                console.log('Request succeeded with JSON response', data);
-                token=data;
+            .then((response) => {
+                let contentType = response.headers.get("content-type");
+                if (response.ok) {
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        return response.json();
+                    } else {
+                        console.log(response.headers.toString());
+                    }
+                }
+            })
+            .then((json) => {
+                token.set(json);
+                //console.log(json.json());
                 //return data.json();
             })
-            /*.then((data) => {
-                createAccountData = data.result;
-            })*/
             .catch(function (error) {
                 console.log('Request failed', error);
             });

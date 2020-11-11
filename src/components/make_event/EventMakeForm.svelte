@@ -1,6 +1,7 @@
 <script>
     import {createEventDispatcher} from "svelte";
     import { token } from '../../store/userInfo.js';
+    import { get } from 'svelte/store'
 
     let eventName ;
     let organizerName ;
@@ -22,6 +23,7 @@
     //const submit = () => dispatch('submit');
     
     function submit() {
+    	console.log(get(token));
         fetch('http://localhost:3018/event/create', {
             method: 'post',
             headers: {
@@ -29,11 +31,12 @@
                 "Access-Control-Allow-Origin": "*"
             },
             body: 'maxPlayer=' + maximumPlayerNumber + '&eventLocation=' + eventLocation + '&startDate=' + date + '&startTime=' + beginTime + '&duration='
-                + duration + '&lateMax='+ autorizedLate + '&token=' + token 
+                + duration + '&lateMax='+ autorizedLate + '&token=' + get(token) 
         })
             .then(json => {return json})
             .then(function (data) {
                 console.log('Request succeeded with JSON response', data);
+                console.log(get(token));
                 //return data.json();
             })
             /*.then((data) => {
@@ -47,9 +50,9 @@
 
 <div id="formMakerContainer">
     <input type="text" bind:value="{eventName}" placeholder="Event name"/>
-    <input type="text" bind:value="{organizerName}" placeholder="Organizer name"/>
-    <input type="text" bind:value="{organizerFullName}" placeholder="Organizer full name"/>
-    <input type="text" bind:value="{mobilePhoneNumber}" placeholder="Mobile phone number"/>
+    <!--<input type="text" bind:value="{organizerName}" placeholder="Organizer name"/> -->
+    <!--<input type="text" bind:value="{organizerFullName}" placeholder="Organizer full name"/>-->
+    <!--<input type="text" bind:value="{mobilePhoneNumber}" placeholder="Mobile phone number"/> -->
     <input type="text" bind:value="{maximumPlayerNumber}" placeholder="Maximum player number"/>
     <input type="text" bind:value="{mail}" placeholder="Mail"/>
     <input type="text" bind:value="{eventLocation}" placeholder="Event location"/>

@@ -17,10 +17,19 @@
             },
             body: 'username=' + inputId + '&password=' + inputPassword
         })
-            .then(json => {return json})
-            .then(function (data) {
-                token.set(data);
-                console.log(token);
+        .then((response) => {
+                let contentType = response.headers.get("content-type");
+                if (response.ok) {
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        return response.json();
+                    } else {
+                        console.log(response.headers.toString());
+                    }
+                }
+            })
+            .then((json) => {
+                token.set(json);
+                //console.log(json.json());
                 //return data.json();
             })
             /*.then((data) => {
