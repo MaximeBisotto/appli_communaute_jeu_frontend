@@ -4,9 +4,9 @@ export let gamesDescriptives ;
 const requestService = new RequestService();
 
 export async function getGameDescriptives() {
-    await requestService.doGet('http://127.0.0.1:3301/allGameDescriptive');
+    await requestService.doGet('http://127.0.0.1:3018/game');
     let results = await requestService.jsonData;
-    gamesDescriptives = (results != null && results.hasOwnProperty('games')) ? results.games : "aucune description";
+    gamesDescriptives = (results != null/* && results.hasOwnProperty('games')*/) ? results/*.games*/ : "aucune description";
     return results;
 }
 

@@ -7,14 +7,14 @@
     let jsonData = [] ;
 
     onMount(async () => {
-        //await getGameDescriptives();
-        //jsonData = [...gamesDescriptives];
-        getGameInfo();
+        await getGameDescriptives();
+        jsonData = [...gamesDescriptives];
+        //getGameInfo();
         console.log(jsonData);
     });
 
     let gameName ;
-    /*async function getFoundGames(gameName) {
+    async function getFoundGames(gameName) {
         console.log(gameName);
         await getGames(gameName);
         jsonData = [...foundGames];
@@ -24,9 +24,9 @@
 
     function clear() {
         gameName = "";
-    }*/
+    }
     
-        async function getGameInfo() {
+        /*async*/ /*function getGameInfo() {
         fetch('http://127.0.0.1:3018/game', {
             method: 'get',
             headers: {
@@ -36,30 +36,30 @@
         })
             .then(json => {return json})
             .then(function (data) {
-                jsonData = Object.entries(data.json());
+                jsonData = data.json();
+                console.log(jsonData);
+                jsonData = Object.entries(jsonData);
+                console.log(jsonData);
                 //console.log(data.json());
                 //return data.json();
             })
-            /*.then((data) => {
-                
-            })*/
             .catch(function (error) {
                 console.log('Request failed', error);
             });
-    }
+    }*/
 </script>
 
 
 <div id="gameShopContainer">
     <SearchComponent id="searchBarShop" bind:value={gameName} on:submit={getFoundGames(gameName)} />
     <div id="gameDescriptiveContainer">
-        {#each jsonData as {name, coast}}
+        {#each jsonData as {name, cost, type, support}}
             <!-- il est recommandé d'éviter la syntaxe {...game} (spread) car elle n'est pas optimale-->
             <GameDescriptive
-                    gameName="name"
-                    gameType="game.gameType"
-                    gameSupport="game.gameSupport"
-                    cost="coast"
+                    gameName="Jeu: {name}"
+                    gameType="Type: {type}"
+                    gameSupport="Support: {support}"
+                    cost="Prix: {cost}"
             />
         {/each}
     </div>
