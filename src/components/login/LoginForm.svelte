@@ -12,13 +12,7 @@
         pseudo2 = pseudo;
     }
 
-    async function enrollment() {
-
-    }
-
 </script>
-
-<Title tabName="Se connecter" subTitleName=""/>
 
 <div>
     <input type="text" bind:value={inputId} placeholder="votre identifiant"/>

@@ -1,28 +1,38 @@
 <script>
-
-	import GameShop from "./components/shop/GameShop.svelte";
-
-
-
-
-
-
+	import { Router, Route, Link } from "svelte-routing";
+	import CreateAccount from "./views/CreateAccount.svelte";
+	import Login from "./views/Login.svelte";
+	import Shop from "./views/Shop.svelte";
+	export let url = "";
+	import NewsGameList from "./views/News.svelte";
+	import DescriptionGame from "./views/DescriptionGame.svelte"
 </script>
 
 <main>
-	<h1>Hello !</h1>
 
-	<input type="text" value="tof"/>
-
-	<button on:click={handleclick}>
-		Sned2
-	</button>
-
-	<!-- GameShop fonctionnel
-	<GameShop/>
-	-->
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 </main>
+
+<Router url="{url}">
+	<nav>
+		<Link to="createAccount">CreateAccount</Link>
+		<Link to="login">Login</Link>
+		<Link to="shop">Shop</Link>
+		<Link to="news">Nouveautés</Link>
+	</nav>
+	<div>
+		<Route path="login" component="{Login}" />
+		<!--for now the router just support case sensitive,
+            one workaround colud be add two time the route
+            Example.
+           <Route path="About" component="{About}" />
+        -->
+		<Route path="createAccount" component="{CreateAccount}"/>
+		<Route path="shop" component="{Shop}"/>
+		<Route path="news" component="{NewsGameList}"/>
+		<Route path="descriptionGame"><DescriptionGame gameName="monopoly"/></Route>
+	</div>
+</Router>
+
 
 <style>
 
@@ -31,13 +41,6 @@
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
 	}
 
 	@media (min-width: 640px) {

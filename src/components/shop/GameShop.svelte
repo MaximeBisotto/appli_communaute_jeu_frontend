@@ -3,7 +3,6 @@
     import {getGameDescriptives, gamesDescriptives, getGames, foundGames} from '../../js/AppController.js';
     import SearchComponent from "./SearchComponent.svelte";
     import {onMount} from "svelte";
-    import Title from "../common/Title.svelte"
 
     let jsonData = [] ;
 
@@ -27,7 +26,7 @@
     }
 </script>
 
-<Title tabName="Boutique" subTitleName=""/>
+
 <div id="gameShopContainer">
     <SearchComponent id="searchBarShop" bind:value={gameName} on:submit={getFoundGames(gameName)} />
     <div id="gameDescriptiveContainer">

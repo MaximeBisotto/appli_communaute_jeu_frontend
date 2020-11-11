@@ -1,12 +1,12 @@
 <script>
-    let gameName;
-    let gameType;
-    let gameSupport;
-    let nbPlayer;
-    let old;
-    let description;
-    let imgPath;
-    let cost;
+    export let gameName;
+    export let gameType;
+    export let gameSupport;
+    export let nbPlayer;
+    export let old;
+    export let description;
+    export let imgPath;
+    export let cost;
 </script>
 
 <div class="gameDescriptiveStyle">

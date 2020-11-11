@@ -12,7 +12,3 @@ export async function login(username, password) {
     }
     pseudo = tmpPseudo;
 }
-
-export async function logout() {
-
-}
