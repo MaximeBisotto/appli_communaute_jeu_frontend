@@ -1,9 +1,7 @@
 <script>
-    //import Title from "../common/Title.svelte";
-    import { token } from '../../store/userInfo.js';
-
     let username='', password='', mail='', city='', birthDate='', mobile='';
     let errorName='', errorPassword='', errorMail='', errorCity='', errorBirthDate='', errorMobile='';
+    let token = '';
 
     function createAccount(username, password, mail, city, birthDate, mobile) {
         fetch('http://localhost:3018/register', {
@@ -27,48 +25,12 @@
             })
             .then((json) => {
                 token.set(json);
-                //console.log(json.json());
-                //return data.json();
             })
             .catch(function (error) {
                 console.log('Request failed', error);
             });
     }
-
-    /*$: if (createAccountData != null) {
-        console.log(createAccountData);
-        if (createAccountData.error) {
-            // si une erreur c'est produite
-            for (let i=0; i < createAccountData.errors.length ; i++) {
-                if (createAccountData.errors[i].hasOwnProperty('name')) {
-                    errorName = createAccountData.errors[i].name;
-                    console.log('error ' + createAccountData.errors[i].name);
-                } else if (createAccountData.errors[i].hasOwnProperty('password')) {
-                    errorPassword = createAccountData.errors[i].password;
-                    console.log('error ' + createAccountData.errors[i].password);
-                } else if (createAccountData.errors[i].hasOwnProperty('mail')) {
-                    errorMail = createAccountData.errors[i].mail;
-                    console.log('error ' + createAccountData.errors[i].mail);
-                } else if (createAccountData.errors[i].hasOwnProperty('city')) {
-                    errorCity = createAccountData.errors[i].city;
-                    console.log('error ' + createAccountData.errors[i].city);
-                } else if (createAccountData.errors[i].hasOwnProperty('birthDate')) {
-                    errorBirthDate = createAccountData.errors[i].birthDate;
-                    console.log('error ' + createAccountData.errors[i].birthDate);
-                } else if (createAccountData.errors[i].hasOwnProperty('mobile')) {
-                    errorMobile = createAccountData.errors[i].mobile;
-                    console.log('error ' + createAccountData.errors[i].mobile);
-                }
-            }
-        }
-        else {
-            console.log('redirection vers une autre page');
-            // s'il n'y a pas d'erreur et que le compte a été créé
-        }
-    }*/
-
 </script>
-
 
 <div>
     <p class="errorMessage" id="nameErrorMessage">{errorName}</p>
@@ -83,18 +45,27 @@
     <input name="birthDate" id="birthDate" type="date" bind:value={birthDate} placeholder="votre date de naissance"/>
     <p class="errorMessage" id="mobileErrorMessage">{errorMobile}</p>
     <input name="mobile" id="mobile" type="tel" pattern="[0]{1}[6-7]{1}[0-9]{8}" bind:value={mobile} placeholder="votre numéro de mobile"/>
+    <button class="button_type1" on:click={createAccount(username, password, mail, city, birthDate, mobile)}>Valider</button>
+    <button class="button_type1" on:click={() => {window.location = "http://localhost:5000/"}}>Annuler</button>
 </div>
-<button on:click={createAccount(username, password, mail, city, birthDate, mobile)}>Valider</button>
-<button on:click={() => {}}>Annuler</button>
 
 <style>
+
+    input {
+        width: 50%;
+    }
+
     .errorMessage {
         color: red;
         font-style: italic;
         font-size: small;
     }
 
-    .inputError {
-        border:1px solid red;
+    .button_type1 {
+        width: 50%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        border-radius: 5%;
+        background: #3891d7;
     }
 </style>

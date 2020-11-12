@@ -1,13 +1,13 @@
 <script>
     import CreateAccountForm from "../components/login/CreateAccountForm.svelte";
     import Title from "../components/common/Title.svelte";
-    let pageName = "CreateAccount Page";
 </script>
 
 <main>
-    <h1>{pageName}</h1>
-    <Title tabName="Créer un compte" subTitleName=""/>
-    <CreateAccountForm />
+    <div class="container">
+        <Title tabName="Créer un compte" subTitleName=""/>
+        <CreateAccountForm />
+    </div>
 </main>
 
 <style>
@@ -19,16 +19,22 @@
         margin: 0 auto;
     }
 
-    h1 {
-        color: #ff3e00;
-        text-transform: uppercase;
-        font-size: 4em;
-        font-weight: 100;
-    }
-
     @media (min-width: 640px) {
         main {
             max-width: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            max-width: 30%;
+            margin-left: 35%;
+            margin-right: 35%;
+            border:1px solid black;
+            border-radius: 5%;
+            padding-top: 5%;
+            padding-bottom: 5%;
         }
     }
 </style>
