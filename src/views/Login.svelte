@@ -1,17 +1,16 @@
 <script>
     import LoginForm from "../components/login/LoginForm.svelte";
     import Title from "../components/common/Title.svelte";
-    let pageName = 'login';
 </script>
 
 <main>
-    <h1>{pageName}</h1>
-    <Title tabName="Se Connecter" subTitleName=""/>
-    <LoginForm />
+    <div class="container">
+        <Title class="title" tabName="Se Connecter" subTitleName=""/>
+        <LoginForm />
+    </div>
 </main>
 
 <style>
-
     main {
         text-align: center;
         padding: 1em;
@@ -23,5 +22,18 @@
         main {
             max-width: none;
         }
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        max-width: 30%;
+        margin-left: 35%;
+        margin-right: 35%;
+        border:1px solid black;
+        border-radius: 5%;
+        padding-top: 5%;
+        padding-bottom: 5%;
     }
 </style>

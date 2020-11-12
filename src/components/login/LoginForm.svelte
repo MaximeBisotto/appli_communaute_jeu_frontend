@@ -1,13 +1,9 @@
 <script>
-    import {login, pseudo} from "../../js/loginService.js";
     import { token } from '../../store/userInfo.js';
-    
 
     let inputId = "";
     let inputPassword = "";
 
-    // cette données devra être stocké dans un store
-    //export const token = writable("");
     async function handleClickConnectButton() {
         fetch('http://127.0.0.1:3018/login', {
             method: 'post',
@@ -29,12 +25,7 @@
             })
             .then((json) => {
                 token.set(json);
-                //console.log(json.json());
-                //return data.json();
             })
-            /*.then((data) => {
-                
-            })*/
             .catch(function (error) {
                 console.log('Request failed', error);
             });
@@ -42,15 +33,34 @@
 
 </script>
 
-<div>
+<div class="formLoginContainer">
     <input type="text" bind:value={inputId} placeholder="votre identifiant"/>
-    <input type="password" bind:value={inputPassword} placeholder="votre mot de passe"/>
-    <a href="http://127.0.0.1:3301/forgottenPassword">mot de passe oublié</a>
+    <input type="password" bind:value={inputPassword} placeholder="votre mot de passe"/><br/>
+    <a href="http://localhost:5000/forgottenPassword">mot de passe oublié</a><br/>
+    <button class="button_type1" on:click={handleClickConnectButton}>Connexion</button>
+    <button class="button_type1"><a href="http://localhost:5000/createAccount">Créer un compte</a></button>
 </div>
 
-<button on:click={handleClickConnectButton}>Connexion</button>
-<button>Créer un compte</button>
-
 <style>
+    input {
+        width: 50%;
+    }
 
+    a {
+        display: inline-block;
+        margin-bottom: 3%;
+    }
+
+    .formLoginContainer {
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+
+    .button_type1 {
+        width: 50%;
+        padding-top: 4%;
+        padding-bottom: 4%;
+        border-radius: 5%;
+        background: #3891d7;
+    }
 </style>
