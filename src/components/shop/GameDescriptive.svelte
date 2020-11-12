@@ -6,18 +6,19 @@
 </script>
 
 <div class="gameDescriptiveStyle">
-    <p>{gameName}</p>
-    <p>{gameType}</p>
-    <p>{gameSupport}</p>
-    <p>{cost}</p>
+    <span>Nom du jeu : {gameName}</span>
+    <span>Type de jeu : {gameType}</span>
+    <span>Support de jeu : {gameSupport}</span>
+    <span>Prix : {cost}</span>
 </div>
 
 <style>
     .gameDescriptiveStyle {
+        width:100%;
+        display: flex;
+        flex-direction: column;
         border: 1px solid black;
         margin-bottom: 1em;
-        margin-left: 1em;
-        margin-right: 1em;
-    }
 
+    }
 </style>
