@@ -3,6 +3,7 @@
     export let gameType;
     export let gameSupport;
     export let cost;
+    export let description;
 </script>
 
 <div class="gameDescriptiveStyle">
@@ -10,6 +11,7 @@
     <span>Type de jeu : {gameType}</span>
     <span>Support de jeu : {gameSupport}</span>
     <span>Prix : {cost}</span>
+    <span>Description: {description}</span>
 </div>
 
 <style>

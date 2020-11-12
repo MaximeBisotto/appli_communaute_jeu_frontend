@@ -117,12 +117,13 @@
 <div id="gameShopContainer">
     <SearchComponent id="searchBarShop" bind:value={gameName} on:submit={getGames(gameName)} />
     <div id="gameDescriptiveContainer">
-        {#each jsonData as {name, cost, type, support}}
+        {#each jsonData as {name, cost, type, support, descriptive}}
             <GameDescriptive
                     gameName="{name}"
                     gameType="{type}"
                     gameSupport="{support}"
                     cost="{cost}"
+                    description="{descriptive}"
             />
         {/each}
     </div>
