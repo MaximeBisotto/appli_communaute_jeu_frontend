@@ -8,6 +8,7 @@
 	import DescriptionGame from "./views/DescriptionGame.svelte";
 	import MakeEvent from "./views/MakeEvent.svelte";
 	import listEvent from "./views/listEvent.svelte";
+
 </script>
 
 <main>
@@ -51,13 +52,17 @@
 
 	.navContainer {
 		width:50%;
+		margin-top: 0;
 		margin-right: 25%;
 		margin-left: 25%;
 		display:flex;
-		flex-direction: column;
+		flex-direction: row;
+		justify-content: space-around;
+		flex-flow: wrap;
 	}
 
 	.button_type2:hover {
+		display: inline-block;
 		background: #adc5cd;
 	}
 </style>
