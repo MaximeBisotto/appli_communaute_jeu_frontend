@@ -15,21 +15,16 @@
 </main>
 
 <Router url="{url}">
-	<nav>
-		<Link to="createAccount">CreateAccount</Link>
-		<Link to="login">Login</Link>
-		<Link to="shop">Shop</Link>
-		<Link to="news">Nouveautés</Link>
-		<Link to="makeEvent">Créer un événement</Link>
-		<Link to="listEvent">Lister les événement</Link>
+	<nav class="navContainer">
+		<button class="button_type2"><Link class="link" to="createAccount">CreateAccount</Link></button>
+		<button class="button_type2"><Link class="link" to="login">Login</Link><br/></button>
+		<button class="button_type2"><Link class="link" to="shop">Shop</Link><br/></button>
+		<button class="button_type2"><Link class="link" to="news">Nouveautés</Link><br/></button>
+		<button class="button_type2"><Link class="link" to="makeEvent">Créer un événement</Link><br/></button>
+		<button class="button_type2"><Link class="link" to="listEvent">Lister les événements</Link><br/></button>
 	</nav>
 	<div>
 		<Route path="login" component="{Login}" />
-		<!--for now the router just support case sensitive,
-            one workaround colud be add two time the route
-            Example.
-           <Route path="About" component="{About}" />
-        -->
 		<Route path="createAccount" component="{CreateAccount}"/>
 		<Route path="shop" component="{Shop}"/>
 		<Route path="news" component="{NewsGameList}"/>
@@ -41,7 +36,6 @@
 
 
 <style>
-
 	main {
 		text-align: center;
 		padding: 1em;
@@ -53,5 +47,17 @@
 		main {
 			max-width: none;
 		}
+	}
+
+	.navContainer {
+		width:50%;
+		margin-right: 25%;
+		margin-left: 25%;
+		display:flex;
+		flex-direction: column;
+	}
+
+	.button_type2:hover {
+		background: #adc5cd;
 	}
 </style>
