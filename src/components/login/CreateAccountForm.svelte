@@ -4,7 +4,6 @@
 
     let username='', password='', mail='', city='', birthDate='', mobile='';
     let errorName='', errorPassword='', errorMail='', errorCity='', errorBirthDate='', errorMobile='';
-    let token = '';
 
     function createAccount(username, password, mail, city, birthDate, mobile) {
         fetch('http://localhost:3018/register', {

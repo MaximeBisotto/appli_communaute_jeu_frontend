@@ -36,7 +36,6 @@
             .then(json => {return json})
             .then(function (data) {
                 console.log('Request succeeded with JSON response', data);
-                console.log(get(token));
                 //return data.json();
             })
             /*.then((data) => {

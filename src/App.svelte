@@ -7,6 +7,7 @@
 	import NewsGameList from "./views/News.svelte";
 	import DescriptionGame from "./views/DescriptionGame.svelte";
 	import MakeEvent from "./views/MakeEvent.svelte";
+	import listEvent from "./views/listEvent.svelte";
 </script>
 
 <main>
@@ -20,6 +21,7 @@
 		<Link to="shop">Shop</Link>
 		<Link to="news">Nouveautés</Link>
 		<Link to="makeEvent">Créer un événement</Link>
+		<Link to="listEvent">Lister les événement</Link>
 	</nav>
 	<div>
 		<Route path="login" component="{Login}" />
@@ -33,6 +35,7 @@
 		<Route path="news" component="{NewsGameList}"/>
 		<Route path="makeEvent" component="{MakeEvent}"/>
 		<Route path="descriptionGame" component="{DescriptionGame}"/>
+		<Route path="listEvent" component="{listEvent}"/>
 	</div>
 </Router>
 
