@@ -16,7 +16,10 @@
                 return data.json();
             })
             .then((data) => {
-                jsonData = [...data.result];
+                //jsonData = [...data.result];
+                //jsonData=Object.entries(data);
+                jsonData = data;
+                console.log(jsonData);
             })
             .catch(function (error) {
                 console.log('Request failed', error);
@@ -33,7 +36,8 @@
                 return data.json();
             })
             .then((data) => {
-                jsonData = [...data.result];
+                //jsonData = [...data.result];
+                jsonData=data
             })
             .catch(function (error) {
                 console.log('Request failed', error);
