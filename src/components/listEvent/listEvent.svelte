@@ -16,7 +16,7 @@
         console.log(gameName);
         await getGames(gameName);
         jsonData = [...foundGames];
-        console.log(jsonData);
+        //console.log(jsonData);
         clear();
     }
 
@@ -43,7 +43,9 @@
                 }
             })
             .then((json) => {
-                jsonData = Object.entries(json);
+                jsonData = json;
+                console.log(jsonData);
+                //jsonData = [...json.result];
                 //return data.json();
             })
             /*.then((data) => {
@@ -58,17 +60,16 @@
 
 <div id="gameShopContainer">
     <div id="gameDescriptiveContainer">
-    	<script>console.log(jsonData);</script>
-        {#each jsonData as {username, startdate, starttime, eventLocation, duration, idevent}}
-            <<GameDescriptive
-                    username={username};
-    				startdate={startDate};
-    				starttime={startTime};
-    				eventLocation={eventLocation};
-    				duration={duration};
-    				idEvent={idEvent};
-    				token={token};
-            />
+        {#each jsonData as {username, startdate, starttime, eventlocation, duration, idevent}}
+            <EventDescriptive
+                    username={username}
+    				startdate={startdate}
+    				starttime={starttime}
+    				eventlocation={eventlocation}
+    				duration={duration}
+    				idevent={idevent}
+    				token={$token}
+  			/>
         {/each}
     </div>
 </div>
