@@ -7,7 +7,8 @@
 	import NewsGameList from "./views/News.svelte";
 	import DescriptionGame from "./views/DescriptionGame.svelte";
 	import MakeEvent from "./views/MakeEvent.svelte";
-	import listEvent from "./views/listEvent.svelte";
+	import ListEvent from "./views/listEvent.svelte";
+	import Building from "./views/Building.svelte";
 
 </script>
 
@@ -31,7 +32,8 @@
 		<Route path="news" component="{NewsGameList}"/>
 		<Route path="makeEvent" component="{MakeEvent}"/>
 		<Route path="descriptionGame" component="{DescriptionGame}"/>
-		<Route path="listEvent" component="{listEvent}"/>
+		<Route path="listEvent" component="{ListEvent}"/>
+		<Route path="forgottenPassword" component="{Building}"/>
 	</div>
 </Router>
 
